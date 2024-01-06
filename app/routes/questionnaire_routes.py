@@ -1,19 +1,28 @@
 from flask import Blueprint, request, jsonify
 from app.auth.auth import require_auth
+from datetime import datetime
+from uuid import uuid4
+from app.config.mongo import MongoSingleton
 
 questionnaire_blueprint = Blueprint('questionnaire', __name__)
 
-@questionnaire_blueprint.route('/create', methods=['POST'])
+base_route = '/v1/questionnaire'
+
+@questionnaire_blueprint.route( base_route + '/', methods=['POST'])
 @require_auth
 def create_questionnaire():
     data = request.json
-    data["createdAt"] = datetime.datetime.utcnow()
-    questionnaire_id = mongo.db.questionnaires.insert_one(data).inserted_id
+    data["createdAt"] = datetime.utcnow()
+    data["_id"] = str(uuid4())
+    questionnaire_id = MongoSingleton.get_instance().flask_db.questionnaires.insert_one(data)
     return jsonify({"message": "Questionnaire created successfully", "id": str(questionnaire_id)}), 201
 
-@questionnaire_blueprint.route('/get/<id>', methods=['GET'])
+@questionnaire_blueprint.route( base_route + '/<id>', methods=['GET'])
 @require_auth
 def get_questionnaire(id):
+    questionnaire = MongoSingleton.get_instance().flask_db.questionnaires.find_one({"_id":id})
+    if questionnaire:
+        return jsonify(questionnaire), 200
     return jsonify({'error': 'Questionnaire not found'}), 404
 
 # @questionnaire_blueprint.route('/get/<id>', methods=['GET'])
