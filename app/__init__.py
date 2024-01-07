@@ -1,12 +1,8 @@
 from flask import Flask
 
-def create_app():
+def create_app(env: str):
     app = Flask(__name__)
-    app.config['MONGODB_SETTINGS'] = {
-        'db': 'questionnaire_db',
-        'host': 'localhost',
-        'port': 27017
-    }
+    app.config['ENV'] = env
 
     # Register routes
     from .routes.questionnaire_routes import questionnaire_blueprint
