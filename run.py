@@ -1,6 +1,6 @@
 from app import create_app
 
-env = 'dev'
+env = 'local'
 app = create_app(env)
 
 if __name__ == '__main__':
