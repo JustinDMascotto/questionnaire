@@ -8,6 +8,7 @@ class MongoSingleton:
 
     @classmethod
     def get_instance(cls):
+        load_dotenv('.env/' + current_app.config["ENV"] )
         if not cls._instance:
             if os.environ.get('MONGO_URL'):
                 cls._instance = MongoClient(os.environ.get('MONGO_URL'))
