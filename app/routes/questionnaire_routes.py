@@ -13,7 +13,12 @@ base_route = '/v1/questionnaire'
 def create_questionnaire():
     data = request.json
     data["createdAt"] = datetime.utcnow()
-    data["_id"] = str(uuid4())
+    id = uuid4()
+    data["versionedId"] = {
+        "_id":str(id),
+        "version":"1"
+    }
+    data["_id"] = str(id)
     questionnaire_id = MongoSingleton.get_instance().flask_db.questionnaires.insert_one(data)
     return jsonify({"message": "Questionnaire created successfully", "id": str(questionnaire_id)}), 201
 
