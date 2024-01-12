@@ -11,3 +11,6 @@
 1. Docker-compose up the mongodb
    ```docker-compose up -d```
 1. Debug run.py   
+
+# Deploy 
+1. git push azure develop

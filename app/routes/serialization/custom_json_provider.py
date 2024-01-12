@@ -18,7 +18,5 @@ class CustomJsonProvider(DefaultJSONProvider):
         - Datetime objects are serialized to iso strings
         - All other clases are delegated back to DefaultJSONProvider
         """
-        if(isinstance(obj,datetime)):
-            return obj.strftime('%Y-%m-%d %H:%M:%S')
         
         return super().dumps(obj,**kw)
