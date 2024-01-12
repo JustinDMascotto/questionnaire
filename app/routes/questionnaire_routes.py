@@ -31,7 +31,6 @@ def create_questionnaire():
 
 
 @questionnaire_blueprint.route( base_route + '/<id>', methods=['GET'])
-@require_auth
 def get_questionnaire(id):
     questionnaire = MongoSingleton.get_instance().flask_db.questionnaires.find_one({"_id":id})
     if questionnaire:
