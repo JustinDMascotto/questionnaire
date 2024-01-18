@@ -8,6 +8,8 @@ def create_app(env: str):
     # Register routes
     from .routes.questionnaire_routes import questionnaire_blueprint
     app.register_blueprint(questionnaire_blueprint)
+    from .routes.questionnaire_response_route import questionnaire_response_blueprint
+    app.register_blueprint(questionnaire_response_blueprint)
     app.json_provider_class = CustomJsonProvider
     app.json = CustomJsonProvider(app)
 
