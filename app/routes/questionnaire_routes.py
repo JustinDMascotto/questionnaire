@@ -3,12 +3,11 @@ from app.auth.auth import require_auth
 from datetime import datetime
 from uuid import uuid4
 from app.config.mongo import MongoSingleton
-from app.models.questionnaire import Questionnaire 
+from app.models.questionnaire import Questionnaire
 from dataclasses import asdict
+from app.routes.constants.constants import base_route
 
 questionnaire_blueprint = Blueprint('questionnaire', __name__)
-
-base_route = '/v1/questionnaire'
 
 @questionnaire_blueprint.route( base_route + '/', methods=['POST'])
 @require_auth
