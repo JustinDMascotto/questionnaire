@@ -10,6 +10,8 @@ def create_app(env: str):
     app.register_blueprint(questionnaire_blueprint)
     from .routes.questionnaire_response_route import questionnaire_response_blueprint
     app.register_blueprint(questionnaire_response_blueprint)
+    from .routes.auth_routes import auth_blueprint
+    app.register_blueprint(auth_blueprint)
     app.json_provider_class = CustomJsonProvider
     app.json = CustomJsonProvider(app)
 
