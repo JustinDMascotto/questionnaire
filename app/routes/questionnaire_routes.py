@@ -1,10 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.routes.auth.auth import require_auth
-from datetime import datetime
-from uuid import uuid4
-from app.config.mongo import MongoSingleton
 from app.models.questionnaire import Questionnaire
-from dataclasses import asdict
 from app.routes.constants.constants import base_route
 from app.repository.questionnaire_repository import create_questionnare, update_questionnaire, get_latest_questionnaire, get_questionnaire_version
 
